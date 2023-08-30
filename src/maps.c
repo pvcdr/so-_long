@@ -6,7 +6,7 @@
 /*   By: cxu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:45:53 by cxu               #+#    #+#             */
-/*   Updated: 2023/08/30 14:06:24 by cxu              ###   ########.fr       */
+/*   Updated: 2023/08/30 15:44:01 by cxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,7 @@ void	ft_read_map(int fd, t_map *map)
 			ft_free_char(line);
 		free(line);
 	}
-	map->map_tab = ft_split(map_line, '/');
-	if (!map->map_tab)
-		ft_free_char (map_line);
-	map->map_cpy = ft_split(map_line, '/');
-	if (!map->map_cpy)
-		ft_free_char (map_line);
-	map->map_cpy_2 = ft_split(map_line, '/');
-	if (!map->map_cpy_2)
-		ft_free_char (map_line);
-	free(map_line);
+	ft_split_map(map, map_line);
 }
 
 void	ft_get_map_stat(t_map *map)

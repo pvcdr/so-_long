@@ -6,7 +6,7 @@
 /*   By: cxu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 15:15:25 by cxu               #+#    #+#             */
-/*   Updated: 2023/08/30 14:40:03 by cxu              ###   ########.fr       */
+/*   Updated: 2023/08/30 15:53:24 by cxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	ft_get_map_stat(t_map *map);
 void	ft_read_map(int fd, t_map *map);
 char	*ft_strjoin_so_long(char *s1, char *s2);
 int		ft_strlen_so_long(char *str);
+void	ft_split_map(t_map *map, char *map_line);
 
 /* error */
 
