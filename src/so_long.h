@@ -6,7 +6,7 @@
 /*   By: cxu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 15:15:25 by cxu               #+#    #+#             */
-/*   Updated: 2023/08/30 13:42:59 by cxu              ###   ########.fr       */
+/*   Updated: 2023/08/30 14:40:03 by cxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_map
 	int		nb_e;
 	int		nb_move;
 	int		count_c;
+	int		start_y;
+	int		start_x;
 }			t_map;
 
 typedef struct s_pos

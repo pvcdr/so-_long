@@ -6,7 +6,7 @@
 /*   By: cxu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:45:53 by cxu               #+#    #+#             */
-/*   Updated: 2023/08/30 13:45:22 by cxu              ###   ########.fr       */
+/*   Updated: 2023/08/30 14:06:24 by cxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ void	ft_read_map(int fd, t_map *map)
 		ft_free_char (map_line);
 	map->map_cpy = ft_split(map_line, '/');
 	if (!map->map_cpy)
+		ft_free_char (map_line);
+	map->map_cpy_2 = ft_split(map_line, '/');
+	if (!map->map_cpy_2)
 		ft_free_char (map_line);
 	free(map_line);
 }

@@ -6,7 +6,7 @@
 /*   By: cxu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:43:34 by cxu               #+#    #+#             */
-/*   Updated: 2023/08/30 13:52:30 by cxu              ###   ########.fr       */
+/*   Updated: 2023/08/30 14:06:58 by cxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ void	free_map_tab(t_map *map)
 		i++;
 	}
 	free(map->map_cpy);
+	i = 0;
+	while (map->map_cpy_2[i])
+	{
+		free(map->map_cpy_2[i]);
+		i++;
+	}
+	free(map->map_cpy_2);
 }
 
 void	destroy_image(t_map *map)

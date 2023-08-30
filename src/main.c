@@ -6,7 +6,7 @@
 /*   By: cxu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:33 by cxu               #+#    #+#             */
-/*   Updated: 2023/08/30 13:45:24 by cxu              ###   ########.fr       */
+/*   Updated: 2023/08/30 14:17:49 by cxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_extension(char *argv)
 		i++;
 	if (ft_strcmp (&str[i - 3], "ber") != 0)
 	{
-		ft_printf("Error\nWrong extension");
+		ft_printf("Error\nWrong extension\n");
 		exit (1);
 	}
 	return ;
@@ -47,7 +47,7 @@ void	ft_empty_file(char *argv)
 	fd = open(argv, O_RDONLY);
 	if (!read(fd, test, 1))
 	{
-		ft_printf("Error\nEmpty file");
+		ft_printf("Error\nEmpty file\n");
 		exit (1);
 	}
 	close(fd);
@@ -61,7 +61,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_printf("Error\nInvalid arg");
+		ft_printf("Error\nInvalid arg\n");
 		return (1);
 	}
 	ft_empty_file(argv[1]);
@@ -69,13 +69,13 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd <= 0)
 	{
-		ft_printf("Error\nIssues with the file");
+		ft_printf("Error\nIssues with the file\n");
 		exit (1);
 	}
 	if (!ft_set_map(fd, &map))
 	{
 		free_map_tab(&map);
-		ft_printf("Issues with the map");
+		ft_printf("Issues with the map\n");
 		exit (1);
 	}
 	ft_init_game(&map);

@@ -6,7 +6,7 @@
 /*   By: cxu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 13:47:09 by cxu               #+#    #+#             */
-/*   Updated: 2023/08/30 13:50:21 by cxu              ###   ########.fr       */
+/*   Updated: 2023/08/30 14:42:13 by cxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,26 @@ void	ft_free_char(char *str)
 	exit (1);
 }
 
-void	free_map_cpy(t_map *map)
+void	find_player(t_map *map)
 {
-	int	i;
+	int	x;
+	int	y;
 
-	i = 0;
-	while (map->map_cpy[i])
+	y = 0;
+	while (map->map_tab[y])
 	{
-		free(map->map_cpy[i]);
-		i++;
+		x = 0;
+		while (map->map_tab[y][++x])
+		{
+			if (map->map_tab[y][x] == 'P')
+			{
+				map->start_y = y;
+				map->start_x = x;
+				return ;
+			}
+		}
+		y++;
 	}
-	free(map->map_cpy);
 }
 
 int	ft_exit_error(char **cpy, int y, int x)
@@ -39,7 +48,7 @@ int	ft_exit_error(char **cpy, int y, int x)
 		return (1);
 	cpy[y][x] = 'V';
 	if (ft_exit_error(cpy, y, x + 1) || ft_exit_error(cpy, y, x - 1)
-		|| ft_exit_error(cpy, y + 1, x) 
+		|| ft_exit_error(cpy, y + 1, x)
 		|| ft_exit_error(cpy, y - 1, x))
 		return (1);
 	return (0);
@@ -47,13 +56,16 @@ int	ft_exit_error(char **cpy, int y, int x)
 
 void	ft_coins_error(t_map *map, char **cpy, int y, int x)
 {
-	map->count_c = 0;
-
-	if (cpy[y][x] == '1' || cpy[y][x] == 'V' || cpy[y][x] == 'E')
+	if (cpy[y][x] == '1' || cpy[y][x] == 'V'
+	|| cpy[y][x] == 'E' || cpy[y][x] == 'c')
 		return ;
 	if (cpy[y][x] == 'C')
+	{
+		cpy[y][x] = 'c';
 		map->count_c++;
-	cpy[y][x] = 'V';
+	}
+	if (cpy [y][x] != 'c')
+		cpy[y][x] = 'V';
 	ft_coins_error(map, cpy, y, x + 1);
 	ft_coins_error(map, cpy, y, x - 1);
 	ft_coins_error(map, cpy, y + 1, x);
@@ -62,14 +74,18 @@ void	ft_coins_error(t_map *map, char **cpy, int y, int x)
 
 int	ft_error2(t_map *map)
 {
-	t_pos	exit;
-
-	exit.x = 1;
-	exit.y = 1;
-
-	if (!ft_exit_error(map->map_cpy, exit.y, exit.x))
+	map->count_c = 0;
+	find_player(map);
+	if (!ft_exit_error(map->map_cpy, map->start_y, map->start_x))
 	{
-		ft_printf("Error\nInvalid map\n");
+		ft_printf("%d, %d", map->start_y, map->start_x);
+		ft_printf("Error\nMap invalid exit\n");
+		return (0);
+	}
+	ft_coins_error(map, map->map_cpy_2, map->start_y, map->start_x);
+	if (map->count_c != map->nb_c)
+	{
+		ft_printf("Error\nMap invalid coin\n");
 		return (0);
 	}
 	return (1);
